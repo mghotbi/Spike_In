@@ -5,7 +5,6 @@
 # --------------------------------------------------------
 
 # Load necessary libraries
-# Load necessary libraries
 suppressMessages(library(phyloseq, dplyr, microbiome))
 
 # Set the working directory
@@ -13,14 +12,22 @@ setwd("C:/Users/mghotbi/Desktop/R results16s_21/collection/UHM/Ch_Al 24 Feb R_IT
 
 # Read metadata
 Metadata_ITS <- read.csv("ITS_METADATA_origin.csv", header = TRUE, sep = ",", row.names = 1)
+colnames(sample_data(physeqITS))
 
-# Filter Spiked_ITS
-Spiked_metadata <- Metadata_ITS %>%
-  filter(plate_ID %in% c("BAD_plate", "AlexRurik_MAD_plate1", "22UHMwf_JDp3_MAD2", "22UHMwf_JDp1"))
+
+#we need spiked ones####
+Spiked <- subset_samples(physeqITS, Plate_ID %in% c("BAD_plate", "AlexRurik_MAD_plate1", "22UHMwf_JDp3_MAD2", "22UHMwf_JDp1"))
+
+
+Spiked %>%
+  sample_data() %>%
+  as.data.frame() %>%
+  head()
 
 
 # Import data
-physeqITS=readRDS("physeqITS.rds")
+saveRDS(physeqITS,"physeqITS_SPIKED240319.rds")
+physeqITS=readRDS("physeqITS_SPIKED240319.rds")
 
 # Define spiked cell counts
 
@@ -29,8 +36,6 @@ physeqITS_collapsed <- physeqITS %>%
   psmelt()%>%
   as.data.frame()
 
-# Read saved phyloseq object
-physeqITS <- readRDS("physeqITS.rds")
 
 # Define spiked cell counts
 spiked_cells_s_Dekkera_bruxellensis <- 733
@@ -47,18 +52,26 @@ spiked_cells_s_Tetragenococcus_halophilus <- 1847
 #collapsing redundant
 
 #s_Dekkera_bruxellensis
-Dekkera_bruxellensis <- subset_taxa(physeqITS, Species == "s__Dekkera_bruxellensis") 
+Dekkera_bruxellensis <- subset_taxa(physeqITS, Species == "Dekkera_bruxellensis") 
+Dekkera_bruxellensis
+#How many, who?
+Dekkera_bruxellensis_collapsed <- Dekkera_bruxellensis %>%
+  tax_glom(taxrank = "Species")%>%
+  psmelt()%>%
+  as.data.frame()
+
 Dekkera.only = merge_taxa(Dekkera_bruxellensis, taxa_names(Dekkera_bruxellensis))
 Dekkera.only
-#Dekkera.mergedSP <- merge_taxa(Dekkera_bruxellensis, taxa_names(Dekkera_bruxellensis)[1:11])
 
 #No_Dekkera_bruxellensis
-No_Dekkera_bruxellensis <- subset_taxa(physeqITS, Species != "s__Dekkera_bruxellensis")
+No_Dekkera_bruxellensis <- subset_taxa(physeqITS, Species != "Dekkera_bruxellensis")
+
+#so lets merg back no_Dekkera with one we merged to keep the Dekkera nice and clean 
 MergedITS<-merge_phyloseq(No_Dekkera_bruxellensis,Dekkera.only)
 
 #So this file contains one ASV identified as s__Dekkera_bruxellensis
 
-MergedITS<-spiked_ITS
+spiked_ITS<- MergedITS
 
 #factors extra####
 {
@@ -107,7 +120,7 @@ library(phyloseq)
 
 # Load OTU table
 otu <- read.csv("Spiked_physeqITS_Absolute.csv", header = TRUE, sep = ",",row.names = 1)
-otumat <- as.matrix(physeqITS_scaled)
+otumat <- as.matrix(otu)
 library("ape")
 
 random_tree = rtree(ntaxa(spiked_ITS), rooted=TRUE, tip.label=taxa_names(spiked_ITS))
@@ -116,9 +129,7 @@ adj_scaled_spiked_ITS <- phyloseq(otu_table(otumat, taxa_are_rows = TRUE),
                                   phy_tree(random_tree),
                                   sample_data(spiked_ITS))
 
-saveRDS(adj_scaled_spiked_ITS,file = "Last_adj_scaled_spiked_ITS.rds")
+saveRDS(adj_scaled_spiked_ITS,file = "Last_adj_scaled_spiked_ITS240319.rds")
 
 
 print("Congratulations, you have your absolute abundance!")
-
-
