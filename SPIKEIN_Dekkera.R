@@ -62,25 +62,8 @@ MergedITS<-spiked_ITS
 
 #factors extra####
 {
-  Sample_or_Control<-as.factor(sample_data(MergedITS)$Sample_or_Control)
   Plate_ID<-as.factor(sample_data(MergedITS)$Plate_ID)
-  Env_broad_scale<-as.factor(sample_data(MergedITS)$Env_broad_scale)
-  quant_reading<-as.factor(sample_data(MergedITS)$quant_reading)
-  Family<-as.factor(sample_data(MergedITS)$Family)
-  host_genus<-as.factor(sample_data(MergedITS)$host_genus)
-  host_taxon<-as.factor(sample_data(MergedITS)$host_taxon)
-  Metamorphosis<-as.factor(sample_data(MergedITS)$Metamorphosis)
-  animal_ecomode<-as.factor(sample_data(MergedITS)$animal_ecomode)
-  Diet_Detailed<-as.factor(sample_data(MergedITS)$Diet_Detailed)
-  Habitat<-as.factor(sample_data(MergedITS)$Habitat)
-  site<-as.factor(sample_data(MergedITS)$site)
-  ecomode<-as.factor(sample_data(MergedITS)$ecomode)
-  Reproduction<-as.factor(sample_data(MergedITS)$Reproduction)
-  ecoregion_IV<-as.factor(sample_data(MergedITS)$ecoregion_IV)
-  Clade_Order<-as.factor(sample_data(MergedITS)$Clade_Order)
-  animal_type<-as.factor(sample_data(MergedITS)$animal_type)
-  ecoregion_III<-as.factor(sample_data(MergedITS)$ecoregion_III)
-}
+ }
 
 
 #spiked-> ready for the scaling factor calc
