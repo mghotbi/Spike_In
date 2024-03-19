@@ -38,11 +38,16 @@ spiked_cells_s_Tetragenococcus_halophilus <- 1847
 spiked_16S <- subset_samples(physeq16S, plate.ID %in% c("BAD_plate", "AlexRurik_MAD_plate1", "22UHMwf_JDp3_MAD2", "22UHMwf_JDp1"))
 
 #Normalize based on the spiked volume of the samples
+summary(otu_table(spiked_16S))  # Summary statistics of ASV counts before normalization
+
 if (class(spiked_16S@otu_table) == "matrix") {
   spiked_16S@otu_table <- spiked_16S@otu_table / 3
 } else {
   spiked_16S@otu_table <- as.matrix(spiked_16S@otu_table) / 3
 }
+
+summary(otu_table(spiked_16S))  # Summary statistics of ASV counts after normalization
+
 physeq16S_adj_scaled <- spiked_16S
 
 # scaling factor calculation starts from here
