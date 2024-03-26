@@ -1,3 +1,10 @@
+# --------------------------------------------------------
+# R Script: SpikeIN scale factor calculation for Tetragenococcus_halophilus
+# Author: [Mitra]
+# Date: [2024 26 03]
+# --------------------------------------------------------
+
+
 #all in one for Spike_In
 getwd()
 # package list:
@@ -371,8 +378,7 @@ summary_phyloseq(physeq16S)
 #for each sample
 summ_phyloseq(physeq16S)
 
-cat("🐢🐢🐍🦎🐍🦎🐸🐸🐸 Congratulations, Donny! 🪻🌼🌻🌹🥀🌺🌸Your efforts have produced amazing results horay 🍄🍄🍄🍄 👍 👌👌 😊  ")
-sentence <- "🐢🐢🐍🦎🐍🦎🐸🐸🐸 Congratulations, Donny! 🪻🌼🌻🌹🥀🌺🌸Your efforts have produced amazing results horay 🍄🍄🍄🍄 👍 👌👌 😊"
-times <- 100
-for (i in 1:times) {
+cat("🐢🐢🐍🦎🐍🦎🐸🐸🐸 Congratulations! 🪻🌼🌻🌹🥀🌺🌸Your efforts have produced amazing results horay 🍄🍄🍄🍄 👍 👌👌 😊  ")
+sentence <- "🐢🐢🐍🦎🐍🦎🐸🐸🐸 🥳🥳🥳 Congratulations! 🪻🌼🌻🌹🥀🌺🌸Your efforts have produced amazing results horay 🥳🥳🥳🍄🍄🍄🍄 👍 👌👌 😊"
+for (i in 1:100) {
   cat(sentence, "\n")}
