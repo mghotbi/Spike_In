@@ -372,11 +372,11 @@ physeq16S_adj_scaled_absolute_abundance <- phyloseq(
 
 
 #check the stat after the absolute calc
-summary(physeq16S@tax_table)
+summary(physeq16S_adj_scaled_absolute_abundance@tax_table)
 #for each ASV 
-summary_phyloseq(physeq16S)
+summary_phyloseq(physeq16S_adj_scaled_absolute_abundance)
 #for each sample
-summ_phyloseq(physeq16S)
+summ_phyloseq(physeq16S_adj_scaled_absolute_abundance)
 
 sentence <- "🐢🐢🐍🦎🐍🦎🐸🐸🐸 🥳🥳🥳 Congratulations! 🪻🌼🌻🌹🥀🌺🌸Your efforts have produced amazing results, hooray 🥳🥳🥳🍄🍄🍄🍄 👍 👌👌 😊"
 for (i in 1:100) {
