@@ -59,7 +59,7 @@ meta<-read.csv("meta.csv",row.names = NULL,header = T,sep = ",")
 })
 
 # Create phyloseq object with the new metadata consists of spike_volume
-cat("prepareg the new metadata, including spike volumes :D 👍 ~<:<<<<<> 😊 ")
+cat("prepare the new metadata, including spike volumes :D 👍 ~<:<<<<<> 😊 ")
 
 ({
   
